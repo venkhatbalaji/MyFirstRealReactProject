@@ -1,15 +1,21 @@
 import React, {Component} from 'react';
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
+import Calculator from './Calculator';
 
 class Slider extends Component{
-    state = {
-        amount:500,
-        month:6       
-    }
-
+        constructor(props){
+            super(props);
+            this.state={
+                amount: this.props.data.amount,
+                month : this.props.data.month
+            }
+            console.log(this.props,"from slider");
+            console.log(this.state,"from slider")
+        }
     render(){
         return(
+            <>
             <div className="slider-box">
                 <div className="slider-amount">
                     <div className="amount-text">
@@ -38,6 +44,8 @@ class Slider extends Component{
                     </div>
                 </div>
             </div>
+            <Calculator data={this.state}/>
+            </>
         );
     }
 }

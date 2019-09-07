@@ -40,7 +40,6 @@
 
 .slider-amount{
   margin: 30px;
-  height: 80px;
 }
 .amount-text{
   font-size: 20px;
@@ -57,8 +56,16 @@
   margin-bottom: 30px;
 }
 .slider{
+  color: black;
   margin-top: 40px;
 }
 .slider-month{
   margin: 30px;
+}
+.calculator-box{
+    position: relative;
+    bottom: -100px;
+    left:25%;
+    width: 700px;
+    text-align: center;
 }
