@@ -10,8 +10,6 @@ class Slider extends Component{
                 amount: this.props.data.amount,
                 month : this.props.data.month
             }
-            console.log(this.props,"from slider");
-            console.log(this.state,"from slider")
         }
     render(){
         return(

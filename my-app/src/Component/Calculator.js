@@ -5,12 +5,13 @@ class Calculator extends Component {
     constructor(props){
         super(props);
         this.state={
+			loading:false,
             interestRate: 0,
             monthlyPayment:0,
             numPayments: 0
         }
+	}
 
-    }
     componentDidMount() {
 		axios
 			.get(
@@ -19,18 +20,21 @@ class Calculator extends Component {
 			.then(res => {
                 console.log(res.data)
 				this.setState({
+					loading:true,
 					interestRate: res.data.interestRate,
 					monthlyPayment: res.data.monthlyPayment.amount,
 					numPayments: res.data.numPayments
 				});
 			})
 			.catch(e => console.log(e));
-    }
+	}
+	
     componentDidUpdate(prevState) {
 		if (
 			prevState.data.amount !== this.props.data.amount ||
 		    prevState.data.month !== this.props.data.month
-		) {
+		) {	
+		this.setState({loading:false});
 			axios
 				.get(
 					`https://ftl-frontend-test.herokuapp.com/interest?amount=${this.props.data.amount}&numMonths=${this.props.data.month}`
@@ -41,6 +45,7 @@ class Calculator extends Component {
 						console.log("Error occurred");
 					} else {
 						this.setState({
+							loading:true,
 							interestRate: res.data.interestRate,
 							monthlyPayment: res.data.monthlyPayment.amount,
 							numPayments: res.data.numPayments
@@ -53,10 +58,19 @@ class Calculator extends Component {
     render(){
         return(
             <div className="calculator-box">
-                <h1 className="calculator-header">Interest Details:</h1>
-                <h2>Interest Rate:{this.state.interestRate}</h2>
-                <h2>Monthly Payment:{this.state.monthlyPayment}</h2>
-                <h2>Number of Payments:{this.state.numPayments}</h2>                
+				{!this.state.loading  ? 
+				(
+					<div className="calculator-header">
+						<div className="loader"></div>
+					</div>
+				) :
+				(<div>
+					<h1 className="calculator-header">Interest Details:</h1>
+					<h2>Interest Rate:{this.state.interestRate}</h2>
+					<h2>Monthly Payment:{this.state.monthlyPayment}</h2>
+					<h2>Number of Payments:{this.state.numPayments}</h2>      				
+				</div>)
+				}					
             </div>
         );
     }

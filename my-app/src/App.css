@@ -41,6 +41,10 @@
 .slider-amount{
   margin: 30px;
 }
+.input-range__label-container {
+	color: #212529;
+	font-size: 16px;
+}
 .amount-text{
   font-size: 20px;
   font-weight: bold;
@@ -68,4 +72,26 @@
     left:25%;
     width: 700px;
     text-align: center;
+}
+.loader {
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 10px solid black;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 1s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+  text-align: center;
+  margin:50px 300px;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
